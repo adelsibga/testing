@@ -4,7 +4,7 @@ const jsdom = require('jsdom')
 const {JSDOM} = jsdom
 
 // const baseLink = 'http://links.qatl.ru/'
-const baseLink = 'https://travelline.ru/'
+const baseLink = 'https://statler.ru/'
 let validLinks = 0
 let invalidLinks = 0
 const visitedLinks = [baseLink]
@@ -37,7 +37,7 @@ async function getLinks(link) {
 			fs.appendFileSync('./valid_links.txt', `${link} - ${response.status}\n`)
 			const dom = new JSDOM(response.data)
 
-			let links = Array.from(dom.window.document.querySelectorAll('a, link')).map(i => i.href.replace(/^\//, ''))
+			let links = Array.from(dom.window.document.querySelectorAll('a')).map(i => i.href.replace(/^\//, ''))
 
 			if (!links) {
 				return
